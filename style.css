@@ -2,6 +2,16 @@ body{
     background: grey;
 }
 .rouge{
+    border: 2px solid red;
+    width: 250px;
+    height: 250px;
+    border-radius: 20%;
+    position: absolute;
+    top:20%;
+    left: 20%;
+    animation:2s;
+}
+.rouge2{
     background: red;
     width: 250px;
     height: 250px;
@@ -10,7 +20,18 @@ body{
     top:20%;
     left: 20%;
 }
+
 .bleu{
+    border: 2px solid blue;
+    width: 250px;
+    height: 250px;
+    border-radius: 20%;
+    position: absolute;
+    top:20%;
+    left: 60%;
+    animation:2s;
+}
+.bleu2{
     background: blue;
     width: 250px;
     height: 250px;
@@ -20,6 +41,16 @@ body{
     left: 60%;
 }
 .jaune{
+    border: 2px solid yellow;
+    width: 250px;
+    height: 250px;
+    border-radius: 20%;
+    position: absolute;
+    top:60%;
+    left: 20%;
+    animation:2s;
+}
+.jaune2{
     background: yellow;
     width: 250px;
     height: 250px;
@@ -29,6 +60,16 @@ body{
     left: 20%;
 }
 .vert{
+    border: 2px solid green;
+    width: 250px;
+    height: 250px;
+    border-radius: 20%;
+    position: absolute;
+    top:60%;
+    left: 60%;
+    animation:2s;
+}
+.vert2{
     background: green;
     width: 250px;
     height: 250px;
@@ -76,4 +117,28 @@ body{
     border-radius:50%;
     top: 50%;
     left: 45%;
+}
+.modalRules{
+    position: absolute;
+    width:auto ;
+    height: auto;
+    display: none;
+    z-index: 999;
+    left: 10%;
+}
+.close {
+    position: absolute;
+  color:black;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  top: 0;
+  left: 98%;
+}
+
+.close:hover,
+.close:focus {
+  color: grey;
+  text-decoration: none;
+  cursor: pointer;
 }
