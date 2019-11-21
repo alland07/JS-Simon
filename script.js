@@ -7,16 +7,28 @@ const $rules = document.querySelector('.modalRules');
 //Ces 4 fonctions vont permettre de toggle afin d'avoir comme une animation
 
 function Rouge() {
-    redbtn.classList.toggle('rouge2');
+    redbtn.className='rouge2';
+    setTimeout(function passer(){
+        redbtn.className='rouge';
+    }, 260);
 }
 function Bleu() {
-    bluebtn.classList.toggle('bleu2');
+    bluebtn.className='bleu2';
+    setTimeout(function passer2(){
+        bluebtn.className='bleu';
+    }, 260);
 }
-function Vert(){
-    greenbtn.classList.toggle('vert2');
+function Vert() {
+    greenbtn.className='vert2';
+    setTimeout(function passer3(){
+        greenbtn.className='vert';
+    }, 260);
 }
-function Jaune(){
-    yellowbtn.classList.toggle('jaune2');
+function Jaune() {
+    yellowbtn.className='jaune2';
+    setTimeout(function passer4(){
+        yellowbtn.className='jaune';
+    }, 260);
 }
 
 
@@ -24,32 +36,36 @@ function Jaune(){
 // Cette fonction va executer le jeu: c'est la fonction principale du jeu
 
 function play(){
+    
     //Génération de chiffre entre 1 et 4 afin que le programme sache quelle couleur allumé
-function generateur(){
-    return Math.trunc(1 + Math.random()*4);
+    function generateur(){
+        let gen =  Math.trunc(1 + Math.random()*4);
+        return gen;
+    }
+    let $generator = generateur();
+    if ($generator==1){
+        Rouge();
+    }
+    else if ($generator==2){
+        Bleu();
+    }
+    else if ($generator==3){
+        Vert();
+    }
+    else if ($generator==4){
+        Jaune();
+    }
+    else{
+        console.log('Erreur');
+    }
+
+
 }
 
-generateur();
-console.log(generateur());
-let $generator = generateur();
 
-
-if (generateur()==1){
-    Rouge();
-}
-else if (generateur()==2){
-    Bleu();
-}
-else if (generateur()==3){
-    Vert();
-}
-else if (generateur()==4){
-    Jaune();
-}
-else{
-    console.log('Error');
-}
-
+//fonction restart Quand on a perdu.
+function recommencer(){
+    play();
 }
 
 
