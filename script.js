@@ -18,9 +18,25 @@ function Vert(){
 function Jaune(){
     yellowbtn.classList.toggle('.jaune2');
 }
-// Cette fonction va executer le jeu
+// Cette fonction va executer le jeu: c'est la fonction principale du jeu
 function Execute(){
+    let couleur = console.log(Math.trunc(1 + Math.random()*4));
 
+    for(i=0;i<4;i++){
+        if(couleur=1){
+            Rouge();
+        }
+        else if(couleur=2){
+            Bleu();
+        }
+        else if(couleur=3){
+            Vert();
+        }
+        else if(couleur=4){
+            Jaune();
+        }
+    }
+    
 }
 
 function rules(){
