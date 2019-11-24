@@ -12,19 +12,34 @@
     <button class="restart" onclick="recommencer()">Restart</button>
     <button class="rules" onclick="rules()">?</button>
     <section>
+
+        <!-----------------------Modal-------------------------------------------------------->
         <div class="modalRules">
             <span class="close" onclick="Close()">&times;</span>
             <img src="rules.jpg" alt="règles du jeu">
         </div>
+
+        <!-----------------------Nombre de clicks------------------------------------------------------------->
         <div class="nbrClick">Nombre de click :
             <span class="resultat"></span>
         </div>
+
+        <!-- ------------------------Nombre de tours validés----------------------------------------------------->
+
+        <div class="nbrTour">Nombre de tours validés :
+                <span class="resultatTour"></span>
+            </div>
+        
+        <!-- Les boutons pour jouer ------------------------------------------------------>
         <div class="rouge" onclick="Rouge()"></div>
         <div class="bleu" onclick="Bleu()"></div>
         <div class="jaune" onclick="Jaune()"></div>
         <div class="vert" onclick="Vert()"></div>
-        <div class="compteur">Tour:</div>
+
+        <p class="Joueur">A vous de jouer!</p>
     </section>
+
+<!-- ------------------------------------- Les audios du jeu---------------------------------------------->
 
     <audio id="audiodo">
             <source src="do.wav" type="audio/ogg">
@@ -38,6 +53,12 @@
     <audio id="audiofa">
             <source src="fa.wav" type="audio/ogg">
     </audio>
+<!-----------------------------------------Modal de fin avec game over et restart--------------------------------------------------->
+    <section>
+        <div class="modalFin">
+
+        </div>
+    </section>
     
     <script src="script.js"></script>
 </body>
