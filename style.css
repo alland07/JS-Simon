@@ -178,3 +178,9 @@ body{
     text-align: center;
     display: none;
 }
+.modalFin{
+    width: auto;
+    height: auto;
+    position: relative;
+    display: none;
+}

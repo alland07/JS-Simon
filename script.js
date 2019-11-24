@@ -9,7 +9,6 @@ const $mi = document.querySelector('#audiomi');
 const $fa = document.querySelector('#audiofa');
 const $avousdejouer = document.querySelector('.Joueur');
 const counttour = document.querySelector('.resultatTour');
-const win = false;
 const $modalfin = document.querySelector('.modalFin');
 
 let computer = [];
@@ -21,6 +20,7 @@ let valide = true;
 let suivant;
 let to = false;
 let appair;
+let win = false;
 
 
 
@@ -81,10 +81,14 @@ function Jaune() {
 
 function play(){
 
-    appair = 0
-    to= true;
-    tour =1;
-    for (let i =0; i<8 ;i++){
+    win = false;
+    computer = [];
+    player = [];
+    appair = 0;
+    suivant =0;
+    to = true;
+    tour = 1;
+    for (let i = 0; i < 8 ;i++){
         computer.push(Math.trunc(1 + Math.random()*4));
         console.log(computer);
     }
@@ -92,9 +96,9 @@ function play(){
     suivant = setInterval(Joueur,1000);
 }
 
+//------------------------------ Au tour du joueur--------------------------------
+
 function Joueur (){
-
-
     to=false;
     if (appair == tour) {
         clearInterval(suivant);
@@ -168,18 +172,17 @@ yellowbtn.addEventListener('click', (event) => {
     }
 })
 
-function check() {
+function Verif() {
     if (player[player.length - 1] !== order[player.length - 1])
       valide = false;
   
-    if (player.length == 3 && valide) {
+    if (player.length == 1 && valide) {
       gagne();
     }
   
     if (valide == false) {
       setTimeout(() => {
         counttour.innerHTML = tour;
-      noise = false;
     })}
   
     if (turn == player.length && valide && !win) {
@@ -188,7 +191,7 @@ function check() {
       compTour = true;
       appair = 0;
       counttour.innerHTML = turn;
-      intervalId = setInterval(gameTurn, 800);
+      suivant = setInterval(gameTurn, 800);
     }
   
 }
@@ -196,6 +199,7 @@ function check() {
 
 
 function gagne() {
+    $modalfin.style.display = "block";
     $modalfin.innerHTML = "WIN!";
     to = false;
     win = true;
