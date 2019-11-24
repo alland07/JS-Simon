@@ -8,15 +8,19 @@ const $re = document.querySelector('#audiore');
 const $mi = document.querySelector('#audiomi');
 const $fa = document.querySelector('#audiofa');
 const $avousdejouer = document.querySelector('.Joueur');
+const counttour = document.querySelector('.resultatTour');
 const win = false;
+const $modalfin = document.querySelector('.modalFin');
 
 let computer = [];
 let player = [];
 let tour;
-let counttour = document.querySelector('.resultatTour');
+let compTour;
 let nbr = 0;
 let valide = true;
 let suivant;
+let to = false;
+let appair;
 
 
 
@@ -77,19 +81,125 @@ function Jaune() {
 
 function play(){
 
+    appair = 0
+    to= true;
     tour =1;
     for (let i =0; i<8 ;i++){
         computer.push(Math.trunc(1 + Math.random()*4));
         console.log(computer);
     }
+    compTour = true;
     suivant = setInterval(Joueur,1000);
 }
 
 function Joueur (){
 
+
+    to=false;
+    if (appair == tour) {
+        clearInterval(suivant);
+        compTour = false;
+        on = true;
+      }
+      $avousdejouer.style.display="block";
+    
+      if (compTour) {
+        setTimeout(function() {
+          if (computer[appair] == 1) Rouge();
+          if (computer[appair] == 2) Bleu();
+          if (computer[appair] == 3) Vert();
+          if (computer[appair] == 4) Jaune();
+          appair++;
+        }, 200);
+      }
+}
+
+//--------------------------- Quand c'est au joueur  , ce qu'il se passe quand il appuie sur le bouton rouge
+redbtn.addEventListener('click', (event) => {
+    if (to) {
+      computer.push(1);
+      Rouge();
+      Verif();
+      if(!win) {
+        setTimeout(() => {
+        }, 300);
+      }
+    }
+}
+)
+
+// Pareil pour le bleu
+bluebtn.addEventListener('click', (event) => {
+    if (to) {
+      computer.push(2);
+      Bleu();
+      Verif();
+      if(!win) {
+        setTimeout(() => {
+        }, 300);
+      }
+    }
+})
+// Le vert
+
+greenbtn.addEventListener('click', (event) => {
+    if (to) {
+      computer.push(3);
+      Vert();
+      Verif();
+      if(!win) {
+        setTimeout(() => {
+        }, 300);
+      }
+    }
+})
+//Le jaune
+
+
+yellowbtn.addEventListener('click', (event) => {
+    if (to) {
+      computer.push(4);
+      Jaune();
+      Verif();
+      if(!win) {
+        setTimeout(() => {
+        }, 300);
+      }
+    }
+})
+
+function check() {
+    if (player[player.length - 1] !== order[player.length - 1])
+      valide = false;
+  
+    if (player.length == 3 && valide) {
+      gagne();
+    }
+  
+    if (valide == false) {
+      setTimeout(() => {
+        counttour.innerHTML = tour;
+      noise = false;
+    })}
+  
+    if (turn == player.length && valide && !win) {
+      tour++;
+      player = [];
+      compTour = true;
+      appair = 0;
+      counttour.innerHTML = turn;
+      intervalId = setInterval(gameTurn, 800);
+    }
+  
 }
 
 
+
+function gagne() {
+    $modalfin.innerHTML = "WIN!";
+    to = false;
+    win = true;
+  }
 //-------------------------------------------------FONCTION RESTART-----------------------------------------------
 function recommencer(){
     play();
