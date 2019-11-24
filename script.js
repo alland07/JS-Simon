@@ -21,6 +21,8 @@ let compTour;
 let valide = true;
 let suivant;
 let apparait;
+let fonctionne;
+let speed;
 
 
 
@@ -50,7 +52,7 @@ function Rouge() {
     redbtn.className='rouge2';
     setTimeout(function passer(){
         redbtn.className='rouge';  
-    }, 1000);
+    }, 500);
     $do.play();
 
 }
@@ -58,21 +60,21 @@ function Bleu() {
     bluebtn.className='bleu2';
     setTimeout(function passer2(){
         bluebtn.className='bleu';
-    }, 1000);
+    }, 500);
     $re.play();
 }
 function Vert() {
     greenbtn.className='vert2';
     setTimeout(function passer3(){
         greenbtn.className='vert';
-    }, 1000);
+    }, 500);
     $mi.play();
 }
 function Jaune() {
     yellowbtn.className='jaune2';
     setTimeout(function passer4(){
         yellowbtn.className='jaune';
-    }, 1000);
+    }, 500);
     $fa.play();
 }
 
@@ -82,10 +84,12 @@ function Jaune() {
 
 function play(){
 
+    fonctionne = true;
     computer = [];
     player = [];
     suivant =0;
     tour = 1;
+    speed = 1;
     apparait = 0;
     for (let i = 0; i < 8 ;i++){
         computer.push(Math.trunc(1 + Math.random()*4));
@@ -121,44 +125,47 @@ function Joueur (){
       }
 }
 
-//--------------------------- Quand c'est au joueur  , ce qu'il se passe quand il appuie sur le bouton rouge-----
+//--------------------------- Quand c'est au joueur  , ce qu'il se passe quand il appuie sur un des 4 boutons-----
 
 redbtn.addEventListener('click', (event) => {
-    if (compTour) {
+    if (fonctionne) {
       player.push(1);
-      Rouge();
       Verif();
+      Rouge();
     }
 })
 
 // Pareil pour le bleu
 bluebtn.addEventListener('click', (event) => {
-    if (compTour) {
+    if (fonctionne) {
       player.push(2);
-      Bleu();
       Verif();
+      Bleu();
     }
 })
 
 // Le vert
 greenbtn.addEventListener('click', (event) => {
-    if (compTour) {
+    if (fonctionne) {
       player.push(3);
-      Vert();
       Verif();
+      Vert();
     }
 })
 
 //Le jaune
 yellowbtn.addEventListener('click', (event) => {
-    if (compTour) {
+    if (fonctionne) {
       player.push(4);
-      Jaune();
       Verif();
+      Jaune();
     }
 })
 
 console.log(player);
+
+// ------------------------------------On compare toutes les infos------------------------------
+
 function Verif() {
     if (player[player.length - 1] !== computer[player.length - 1])
       valide = false;
@@ -172,14 +179,19 @@ function Verif() {
         counttour.innerHTML = tour;
     })}
   
-    if (turn == player.length && valide && !win) {
+    if (tour == player.length && valide) {
       tour++;
       player = [];
       compTour = true;
       apparait = 0;
-      counttour.innerHTML = turn;
-      suivant = setInterval(gameTurn, 800);
+      counttour.innerHTML = tour-1;
+      suivant = setInterval(Joueur, 800);
+      speed++;
     }
+    if (tour == player.length && !valide) {
+        $modalfin.innerHTML =" Vous avez perdu";
+        $modalfin.style.display="block";
+      }
   
 }
 
@@ -187,12 +199,12 @@ function Verif() {
 
 function gagne() {
     $modalfin.style.display = "block";
-    $modalfin.innerHTML = "WIN!";
-    to = false;
-    win = true;
+    $modalfin.innerHTML = "Vous avez gagné";
+    
   }
 //-------------------------------------------------FONCTION RESTART-----------------------------------------------
 function recommencer(){
+    $modalfin.style.display="none";
     play();
 }
 

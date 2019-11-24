@@ -100,6 +100,15 @@ body{
     width: 150px;
     height: 50px;
 }
+.restart2{
+    background: black;
+    color: white;   
+    border: 2px solid black;
+    border-radius: 20%;
+    width: auto;
+    height: auto;
+    text-align: center;
+}
 .rules{
     position: absolute;
     background: black;
@@ -179,8 +188,14 @@ body{
     display: none;
 }
 .modalFin{
-    width: auto;
-    height: auto;
-    position: relative;
+    width: 1000px;
+    height: 500px;
+    position: absolute;
     display: none;
+    top:20%;
+    left: 20%;
+    size: 25px;
+    background:black;
+    color: white;
+    anchor
 }
