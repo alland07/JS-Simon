@@ -3,24 +3,25 @@ const bluebtn = document.querySelector('.bleu');
 const yellowbtn = document.querySelector('.jaune');
 const greenbtn = document.querySelector('.vert');
 const $rules = document.querySelector('.modalRules');
+
 const $do = document.querySelector('#audiodo');
 const $re = document.querySelector('#audiore');
 const $mi = document.querySelector('#audiomi');
 const $fa = document.querySelector('#audiofa');
+
 const $avousdejouer = document.querySelector('.Joueur');
 const counttour = document.querySelector('.resultatTour');
+
 const $modalfin = document.querySelector('.modalFin');
 
 let computer = [];
 let player = [];
 let tour;
 let compTour;
-let nbr = 0;
 let valide = true;
 let suivant;
-let to = false;
-let appair;
-let win = false;
+let apparait;
+
 
 
 
@@ -81,13 +82,11 @@ function Jaune() {
 
 function play(){
 
-    win = false;
     computer = [];
     player = [];
-    appair = 0;
     suivant =0;
-    to = true;
     tour = 1;
+    apparait = 0;
     for (let i = 0; i < 8 ;i++){
         computer.push(Math.trunc(1 + Math.random()*4));
         console.log(computer);
@@ -99,84 +98,72 @@ function play(){
 //------------------------------ Au tour du joueur--------------------------------
 
 function Joueur (){
-    to=false;
-    if (appair == tour) {
-        clearInterval(suivant);
+    if (apparait == tour) {
         compTour = false;
-        on = true;
+        clearInterval(suivant);
+
       }
+
       $avousdejouer.style.display="block";
+      setTimeout(function changement(){
+        $avousdejouer.style.display="none";  
+    }, 500);
+
     
       if (compTour) {
         setTimeout(function() {
-          if (computer[appair] == 1) Rouge();
-          if (computer[appair] == 2) Bleu();
-          if (computer[appair] == 3) Vert();
-          if (computer[appair] == 4) Jaune();
-          appair++;
+          if (computer[apparait] == 1) Rouge();
+          if (computer[apparait] == 2) Bleu();
+          if (computer[apparait] == 3) Vert();
+          if (computer[apparait] == 4) Jaune();
+          apparait++;
         }, 200);
       }
 }
 
-//--------------------------- Quand c'est au joueur  , ce qu'il se passe quand il appuie sur le bouton rouge
+//--------------------------- Quand c'est au joueur  , ce qu'il se passe quand il appuie sur le bouton rouge-----
+
 redbtn.addEventListener('click', (event) => {
-    if (to) {
-      computer.push(1);
+    if (compTour) {
+      player.push(1);
       Rouge();
       Verif();
-      if(!win) {
-        setTimeout(() => {
-        }, 300);
-      }
     }
-}
-)
+})
 
 // Pareil pour le bleu
 bluebtn.addEventListener('click', (event) => {
-    if (to) {
-      computer.push(2);
+    if (compTour) {
+      player.push(2);
       Bleu();
       Verif();
-      if(!win) {
-        setTimeout(() => {
-        }, 300);
-      }
     }
 })
-// Le vert
 
+// Le vert
 greenbtn.addEventListener('click', (event) => {
-    if (to) {
-      computer.push(3);
+    if (compTour) {
+      player.push(3);
       Vert();
       Verif();
-      if(!win) {
-        setTimeout(() => {
-        }, 300);
-      }
     }
 })
+
 //Le jaune
-
-
 yellowbtn.addEventListener('click', (event) => {
-    if (to) {
-      computer.push(4);
+    if (compTour) {
+      player.push(4);
       Jaune();
       Verif();
-      if(!win) {
-        setTimeout(() => {
-        }, 300);
-      }
     }
 })
 
+console.log(player);
 function Verif() {
-    if (player[player.length - 1] !== order[player.length - 1])
+    if (player[player.length - 1] !== computer[player.length - 1])
       valide = false;
   
-    if (player.length == 1 && valide) {
+    if (player.length == 8 && valide) {
       gagne();
     }
   
@@ -189,14 +176,14 @@ function Verif() {
       tour++;
       player = [];
       compTour = true;
-      appair = 0;
+      apparait = 0;
       counttour.innerHTML = turn;
       suivant = setInterval(gameTurn, 800);
     }
   
 }
 
-
+//---------------------------------------On gagne----------------------------------------------------
 
 function gagne() {
     $modalfin.style.display = "block";
